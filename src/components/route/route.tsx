@@ -1,9 +1,10 @@
 import React from 'react';
 import Home from '../../pages/home/home';
 import { BrowserRouter as Router, Switch, Route, Link } from 'react-router-dom';
+import { Questions } from '../../pages/questions/questions';
 
 
-export default function RouteChess() {
+export default function RouteApp() {
   return (
     <Router>
       <div>
@@ -13,14 +14,17 @@ export default function RouteChess() {
               <Link to="/">Home</Link>
             </li>
             <li>
-              <Link to="/board">Board</Link>
+              <Link to="/questions">Questions</Link>
             </li>
           </ul>
         </nav>
 
         <Switch>
-          <Route path="/">
+          <Route exact path="/">
             <Home />
+          </Route>
+          <Route path="/questions">
+            <Questions/>
           </Route>
         </Switch>
       </div>
