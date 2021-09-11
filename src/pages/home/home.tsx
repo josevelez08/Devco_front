@@ -4,10 +4,13 @@ import { useHistory } from "react-router-dom";
 export default function Home() {
     const [inputUser, setInputUser] = useState('');
     const history = useHistory();
-    const {createUser}  = useContext(AppContext)
+    const {createUser,}  = useContext(AppContext)
+
+
     const inputUserHandler = (event: any ) =>{
         setInputUser(event.target.value)
-    } 
+    }
+
 
     const submitHandler = async (event: any) => {
         event.preventDefault();
@@ -25,7 +28,6 @@ export default function Home() {
                         onChange={inputUserHandler}
                         value={inputUser}
                     />
-
             <button type="submit">Search!!</button>
             </form>
     </div>
