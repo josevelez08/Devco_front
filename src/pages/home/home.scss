@@ -1,0 +1,44 @@
+.box {
+ background-color: rgb(255, 255, 255);
+ margin: 20px;
+ margin-left: 400px;
+ margin-right: 100px;
+ height: 400px;
+ width: 400px;
+ display: flex;
+ justify-content: center;
+ align-items: center;
+
+}
+
+.card {
+    border: 5px double rgb(14, 13, 13);
+    height: 387px;
+}
+.input_space {
+    width: 251px;
+    margin-left: 70px;
+    margin-top: 32px;
+    margin-top: 0px;
+}
+.size_card {
+    width: 386px;
+}
+.main_text{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 65px;
+    margin-bottom: -45px
+}
+.button_class{
+    margin-top: 40px;
+    margin-left: 160px;
+}
+.data_fill_input{
+    margin-top: 98px;
+    margin-bottom: 10px;
+    margin-left: 70px;
+}
+body {background-color: rgb(255, 255, 255);
+    margin-left: 40px;}

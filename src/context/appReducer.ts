@@ -15,7 +15,7 @@ export const reducer = ( state: AppState, {type, payload}: {type: string, payloa
             } else {
                 questions1 = nPayload.questions1;
             }
-            return { ...state, name: nPayload?.name, _id: nPayload?._id, questions1: questions1, questions2: nPayload?.questions2} ;
+            return { ...state, name: nPayload?.name, _id: nPayload?._id, questions1: questions1, questions2: nPayload?.questions2, average: 0} ;
         case AppActios.UPDATE_QUESTIONS:
             return { ...state, name: nPayload?.name, _id: nPayload?._id, questions1: nPayload?.questions1, questions2: nPayload?.questions2, average: nPayload.average };
         default: 
