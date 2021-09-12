@@ -23,15 +23,16 @@ export const AppProvider: FC = ({children})=> {
 
     const createUser = async (name: string) => {
 
-        const user = await createUsersFetch(name);
-        dispatch({ type : AppActios.SAVE_USER, payload: user});
+        const {data} = await createUsersFetch(name);
+        console.log(data, "_____________________")
+        dispatch({ type : AppActios.SAVE_USER, payload: data});
     };
 
-    const updateQuestions = async (name: string, _id: string, questions1:Array<any>, questions2:Array<any>) => {
+    const updateQuestions = async (name: string, questions1:Array<any>, questions2:Array<any>) => {
 
 
-    const questions = await updateQuestionFetch(name, _id, questions1,questions2);
-    dispatch({ type : AppActios.SAVE_USER, payload: questions});
+    const questions = await updateQuestionFetch(name, questions1,questions2);
+    dispatch({ type : AppActios.UPDATE_QUESTIONS, payload: questions});
     }
 
     const AppContext = appContext;

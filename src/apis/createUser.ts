@@ -3,7 +3,7 @@
 export const createUsersFetch = async (user: string) => {
   
     const response = await fetch(`http://localhost:8080/api/v1/users`, {
-      method: 'POST',
+      method: 'PATCH',
       headers: {
         'Content-Type': 'application/json'
       },
@@ -14,8 +14,7 @@ export const createUsersFetch = async (user: string) => {
     if (response.ok) { // if HTTP-status is 200-299
         // get the response body (the method explained below)
         let {data} = await response.json();
-        console.log(data);
-        return data.user;
+        return data;
     } else {
       console.log(response);
     }

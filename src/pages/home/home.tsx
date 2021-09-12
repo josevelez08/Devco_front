@@ -4,7 +4,7 @@ import { useHistory } from "react-router-dom";
 export default function Home() {
     const [inputUser, setInputUser] = useState('');
     const history = useHistory();
-    const {createUser,}  = useContext(AppContext)
+    const {createUser}  = useContext(AppContext)
 
 
     const inputUserHandler = (event: any ) =>{
@@ -15,6 +15,7 @@ export default function Home() {
     const submitHandler = async (event: any) => {
         event.preventDefault();
 
+        console.log(inputUser);
         await createUser(inputUser);
         history.push("/questions");
     }
