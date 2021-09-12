@@ -10,7 +10,8 @@ export const initialAppState: AppState  =  {
     name: "",
     questions1: [],
     questions2: [],
-    _id: ""
+    _id: "",
+    average: 0
 }
 
 
@@ -18,21 +19,21 @@ export const AppProvider: FC = ({children})=> {
 
     const [state, dispatch] = useReducer(reducer, initialAppState);
 
-    const {name, _id, questions1, questions2} = state;
+    const {name, _id, questions1, questions2, average} = state;
 
 
     const createUser = async (name: string) => {
 
-        const {data} = await createUsersFetch(name);
-        console.log(data, "_____________________")
-        dispatch({ type : AppActios.SAVE_USER, payload: data});
+        const {user} = await createUsersFetch(name);
+        dispatch({ type : AppActios.SAVE_USER, payload: user});
     };
 
     const updateQuestions = async (name: string, questions1:Array<any>, questions2:Array<any>) => {
 
 
-    const questions = await updateQuestionFetch(name, questions1,questions2);
-    dispatch({ type : AppActios.UPDATE_QUESTIONS, payload: questions});
+        const {response} = await updateQuestionFetch(name, questions1,questions2);
+        console.log(response);
+        dispatch({ type : AppActios.UPDATE_QUESTIONS, payload: response});
     }
 
     const AppContext = appContext;
@@ -42,6 +43,7 @@ export const AppProvider: FC = ({children})=> {
         _id,
         questions1,
         questions2,
+        average,
         createUser: createUser,
         updateQuestions
     }

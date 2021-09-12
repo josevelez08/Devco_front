@@ -1,128 +1,84 @@
 import { FC, useContext, useState } from "react";
-import { AppContext,  } from "../../context/appContext";
+import { AppContext } from "../../context/appContext";
 
 
 export const  Questions: FC = ()=> {
-    const {updateQuestions}  = useContext(AppContext)
-    const [checkQuestion1, setCheckQuestion1] = useState(false);
-    const [checkQuestion2, setCheckQuestion2] = useState(false);
-    const [checkQuestion3, setCheckQuestion3] = useState(false);
-    const [checkQuestion4, setCheckQuestion4] = useState(false);
-    const [checkQuestion5, setCheckQuestion5] = useState(false);
-    const [checkQuestion6, setCheckQuestion6] = useState(false);
-    const [checkQuestion7, setCheckQuestion7] = useState(false);
-    const [checkQuestion8, setCheckQuestion8] = useState(false);
-    const {name, questions1, questions2,_id} = useContext(AppContext);
+    const {name, questions1, questions2, updateQuestions} = useContext(AppContext);
+    const [questions, setQuestions] = useState([...questions1]);
+    const [q2, setQ2] = useState ([...questions2]);
 
-
-    const checkQuestionHandler1 = () =>{
-        setCheckQuestion1(!checkQuestion1);
-    }
-    const checkQuestionHandler2 = () =>{
-        setCheckQuestion2(!checkQuestion2);
-    }
-    const checkQuestionHandler3 = () =>{
-        setCheckQuestion3(!checkQuestion3);
-    }
-    const checkQuestionHandler4 = () =>{
-        setCheckQuestion4(!checkQuestion4);
-    }
-    const checkQuestionHandler5 = () =>{
-        setCheckQuestion5(!checkQuestion5);
-    }
-    const checkQuestionHandler6 = () =>{
-        setCheckQuestion6(!checkQuestion6);
-    }
-    const checkQuestionHandler7 = () =>{
-        setCheckQuestion7(!checkQuestion7);
-    }
-    const checkQuestionHandler8 = () =>{
-        setCheckQuestion8(!checkQuestion8);
-    }
+ 
 
     const submitHandler = async (event: any) => {
         event.preventDefault();
 
-
-        await updateQuestions(name, _id, questions1, questions2);
+        await updateQuestions(name, questions, q2);
     }
 
+    const handlerQuestions = ( question: any)=> {
+     const newQuestions = questions.map((q)=>{
+        if(q.number === question.number){
+            return {
+                ...q, answer: !q.answer 
+            }
+        }
+        return q;
+    } );
+     setQuestions(newQuestions);
+    }
+    const handleQuestion2 = ( question: any)=> {
+        const newQuestions = q2.map((q)=>{
+           if(q.number === question.number){
+               return {
+                   ...q, answer: !q.answer 
+               }
+           }
+           return q;
+       } );
+        setQ2(newQuestions);
+       }
 
+    const addQuestionHandler  = ()=> {
+        setQ2([...q2, { number: q2.length + 1, answer: false }])
+    }
+
+    const removeQuestionHandler= ()=> {
+         q2.pop();
+        setQ2([...q2]);
+
+    }
 
     return (
         <div>
-            <div>
-                <p>Question 1 
+            <div>name:{name}</div>
+            <form onSubmit={submitHandler}>
+
+            {questions.map((q, index) => ( <div key={index}>
+                <p>Question { q.number} 
                     <input
                     type="checkbox"
-                    onChange={checkQuestionHandler1}
-                    checked={checkQuestion1}
+                    onChange={()=> handlerQuestions(q)}
+                    checked={q.answer}
                     />
                 </p>
+            </div>))}   
+            <h6> Estapa 2</h6>
+            <div>
+            <button onClick={addQuestionHandler}>Agregar pregunta</button>
+            <button onClick={removeQuestionHandler}> Remover pregunta</button>
+
+            {q2.map((q, index) => ( <div key={index}>
+                <p>Question { q.number} 
+                    <input
+                    type="checkbox"
+                    onChange={()=> handleQuestion2(q)}
+                    checked={q.answer}
+                    />
+                </p>
+            </div>))} 
             </div>
-            <div>
-                <p>Question 2
-                    <input
-                    type="checkbox"
-                    onChange={checkQuestionHandler2}
-                    checked={checkQuestion2}
-                    />
-                </p>
-            </div>
-            <div>
-                <p>Question 3
-                    <input
-                    type="checkbox"
-                    onChange={checkQuestionHandler3}
-                    checked={checkQuestion3}
-                    />
-                </p>
-            </div>
-            <div>
-                <p>Question 4
-                <input
-                type="checkbox"
-                onChange={checkQuestionHandler4}
-                checked={checkQuestion4}
-                />
-                </p>
-            </div>
-            <div>
-                <p>Question 5
-                    <input
-                    type="checkbox"
-                    onChange={checkQuestionHandler5}
-                    checked={checkQuestion5}
-                    />
-                </p>
-            </div>
-                <div>
-                <p>Question 6
-                    <input
-                    type="checkbox"
-                    onChange={checkQuestionHandler6}
-                    checked={checkQuestion6}
-                    />
-                </p>
-                </div>
-            <div>
-                <p>Question 7
-                    <input
-                    type="checkbox"
-                    onChange={checkQuestionHandler7}
-                    checked={checkQuestion7}
-                    />
-                </p>
-                </div>
-            <div>
-                <p>Question 8
-                    <input
-                    type="checkbox"
-                    onChange={checkQuestionHandler8}
-                    checked={checkQuestion8}
-                    />
-                </p>
-            </div>
+            <button type="submit">Enviar!!</button>
+            </form>
         </div>
     )
 } 

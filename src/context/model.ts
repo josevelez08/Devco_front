@@ -5,4 +5,5 @@ export interface AppState {
     questions1: Array<any>;
     questions2: Array<any>;
     _id: string;
+    average: number
 }
